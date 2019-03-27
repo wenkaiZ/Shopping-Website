@@ -1,0 +1,54 @@
+﻿@model IEnumerable<a5.Models.PaymentInfo>
+<p style="color:red">
+    Please select one card you have ever used:
+</p>
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.CardNum)
+                </th>
+
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CardNum)
+                    </td>
+                    <td>
+                        <a asp-action="Checkout"> Use this</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<p style="color:red">
+    Or You can enter a new deposit/credit card infomation:
+</p>
+<form asp-action="POST">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-group">
+        <input class="form-control" name="Id" type="number" style="display:none" value="" />
+    </div>
+    <div class="form-group">
+        <input class="form-control" name="UserName" type="text" style="display:none" value="@UserClient.username" />
+    </div>
+    <div class="form-group">
+        <label name="CardNum" class="control-label"></label>
+        <input name="CardNum" class="form-control" placeholder="Card Number" type="number" />
+    </div>
+    <div class="form-group">
+        <label name="PassWord" class="control-label"></label>
+        <input class="form-control" name="PassWord" placeholder="Password" type="password" />
+    </div>
+    <div class="form-group">
+        <input type="submit" asp-action="Checkout" value="Submit" class="btn btn-primary" />
+    </div>
+</form>
+<a asp-action="crush" class="btn btn-danger" style="float:right"> Crush</a>

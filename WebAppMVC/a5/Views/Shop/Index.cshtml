@@ -1,0 +1,106 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Shop";
+}
+@model IEnumerable<a5.Models.Product>
+@inject a5.Models.CartDB DB
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <style>
+
+
+        h1 {
+            position: center;
+            font-family: 'Bad Script', cursive;
+            color: orangered;
+        }
+
+        p {
+            text-align: left;
+            font-family: 'Lato', sans-serif;
+        }
+    </style>
+    <meta charset="utf-8">
+    <title>My Awesome Store</title>
+
+    <!--The following line loads in your CSS style sheet-->
+    <link rel="stylesheet" href="styles/index.css">
+
+    <!--The following line loads in 2 fonts from Google Fonts: Bad Script and Lato-->
+    <link href="https://fonts.googleapis.com/css?family=Bad+Script|Lato" rel="stylesheet">
+
+    <!--The following line loads in your JS script-->
+    <script src="js/todo.js"></script>
+</head>
+<body>
+    <div style="overflow:auto"> 
+        <h1>Welcome to my store!</h1>
+        <a asp-action="cart" style="float:right" class="btn btn-primary"> See Cart</a>
+    </div>
+    <div class="container">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ProductName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Price)
+                    </th>
+                    <th>
+                        Add Item
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ProductName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Price)
+                        </td>
+                        <td>
+                            <form asp-action="POST">
+                                <input name="ProductName" type="text" value="@item.ProductName" style="display:none" />
+                                <input name="UserId" type="text" value="@UserClient.username" style="display:none" />
+                                <input type="submit" value="Add" />
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div>
+        <a asp-action="paymentinfo" style="float:left" class="btn btn-primary"> Check Out</a>
+
+        <a asp-action="crush" style="float:right" class="btn btn-danger"> Crush</a>
+        <div style="clear:both"></div>
+    </div>
+    <div class="container-fluid bg-4 text-center">
+        <h3 class="margin">Here are our company's products!</h3><br>
+        <div class="row" style="overflow:auto">
+            <div class="col-sm-4">
+                <p>iPhoneX</p>
+                <img src="https://o.aolcdn.com/images/dims?quality=85&image_uri=https%3A%2F%2Fs.aolcdn.com%2Fhss%2Fstorage%2Fmidas%2Fbe8deaf69ebb2e866257646588bb5999%2F206681111%2FIPHONE.jpg&client=amp-blogside-v2&signature=95c6c8ca18041d5509569b436586a2238c49ef04" class="img-responsive margin"  alt="Image">
+            </div>
+            <div class="col-sm-4">
+                <p>Beats</p>
+                <img src="https://www.bestheadphones.co.uk/wp-content/uploads/2019/01/avoid-monster.jpeg" class="img-responsive margin"  alt="Image">
+            </div>
+            <div class="col-sm-4">
+                <p>Apple Watch</p>
+                <img src="https://cdn.pocket-lint.com/r/s/970x/assets/images/142228-smartwatches-review-apple-watch-series-3-review-image1-zwf0iiorer.jpg" class="img-responsive margin"  alt="Image">
+            </div>
+        </div>
+    </div>
+</body>
+</html>
